@@ -1,0 +1,217 @@
+:root {
+    --bg-dark: #0f172a;
+    --panel-dark: #1e293b;
+    --accent-blue: #38bdf8;
+    --accent-green: #4ade80;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    background-color: var(--panel-dark);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+}
+
+.tracker {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* =====================================================================
+   3D FLASHCARD TRANSFORMATION MATRIX
+   ===================================================================== */
+
+/* Define the 3D projection environment viewport */
+.flashcard-viewport {
+    width: 100%;
+    max-width: 500px;
+    height: 320px;
+    perspective: 1200px; /* Establishes the optical focal depth plane */
+    margin-bottom: 2rem;
+}
+
+/* The element that undergoes actual geometric translation */
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* Tells child targets to live in spatial 3D */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+/* State trigger toggled cleanly via JS DOM management */
+.flashcard-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* Universal card alignment boundaries */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Critical: Hides the mirror view when flipped over */
+    background-color: var(--panel-dark);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.card-front h2 {
+    font-size: 1.75rem;
+    text-align: center;
+    margin: auto 0;
+    line-height: 1.4;
+}
+
+/* Shift the backside face away from index baseline orientation */
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-back p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Badges & Interface Accents */
+.badge {
+    align-self: flex-start;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge.success {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--accent-green);
+}
+
+.hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* =====================================================================
+   CSS KEYFRAME EXECUTION LOOP CONTAINERS
+   ===================================================================== */
+.loop-container {
+    background: #0f172a;
+    height: 100px;
+    border-radius: 8px;
+    border: 1px dashed #334155;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+
+.animated-node {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-blue);
+    border-radius: 6px;
+    position: absolute;
+}
+
+/* --- Keyframe Variant 1: Queue Array Sliding --- */
+.loop-queue {
+    animation: slideQueue 2.5s infinite linear;
+}
+
+@keyframes slideQueue {
+    0% { transform: translateX(-200px); background-color: var(--accent-blue); }
+    50% { background-color: var(--accent-green); }
+    100% { transform: translateX(200px); background-color: var(--accent-blue); }
+}
+
+/* --- Keyframe Variant 2: Stack Pushing (LIFO) --- */
+.loop-stack {
+    animation: pushPop 2.5s infinite ease-in-out;
+}
+
+@keyframes pushPop {
+    0% { transform: translateY(60px); opacity: 0; }
+    30% { transform: translateY(0); opacity: 1; background-color: var(--accent-blue); }
+    70% { transform: translateY(0); opacity: 1; background-color: var(--accent-green); }
+    100% { transform: translateY(-60px); opacity: 0; }
+}
+
+/* --- Keyframe Variant 3: Binary Hash Rescaling --- */
+.loop-hash {
+    animation: hashPulse 2s infinite ease-in-out;
+    border-radius: 50%;
+}
+
+@keyframes hashPulse {
+    0%, 100% { transform: scale(0.6); filter: drop-shadow(0 0 0px var(--accent-blue)); }
+    50% { transform: scale(1.2); background-color: var(--accent-green); filter: drop-shadow(0 0 12px var(--accent-green)); }
+}
+
+/* Navigation System Controls */
+.control-dock {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary { background: var(--accent-blue); color: #0f172a; }
+.btn-primary:hover { background: #7dd3fc; transform: translateY(-1px); }
+.btn-secondary { background: #334155; color: var(--text-light); }
+.btn-secondary:hover { background: #475569; }
