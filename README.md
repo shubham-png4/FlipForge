@@ -14,6 +14,76 @@ The application accomplishes spatial separation and layout translations without 
 
 ### 2. Micro-Reflow Re-initialization
 To seamlessly switch animation loops when changing cards, the script drops class lists and checks `offsetWidth`. This triggers an instant browser micro-reflow event, clean-resetting hardware timelines without causing visible layout flickering.
+# ProgLearn 🚀
+
+**Learn programming languages through interactive animations, flashcards, quizzes, and a live playground.**
+
+An open-source, beginner-friendly web application built with pure HTML, CSS, and JavaScript.
+
+## ✨ Features
+
+- **Interactive Flashcards** with smooth 3D flip animations
+- **Visual Animations** — Watch concepts come alive (For loops, Bubble Sort, and more)
+- **Adaptive Quizzes** with instant feedback
+- **Code Playground** — Run JavaScript instantly
+- **Multi-language support** (Python, JavaScript, Java — easily extensible)
+- Fully responsive and beautiful UI
+
+## 🎯 How to Use
+
+1. Clone or download the repository
+2. Open `index.html` in your browser
+3. Start learning!
+
+No installation or server required.
+
+## 🛠 Tech Stack
+
+- HTML5
+- CSS3 (with modern animations)
+- Vanilla JavaScript
+- HTML5 Canvas for visualizations
+
+## 📁 Project Structure
+
+```
+ProgLearn/
+├── index.html
+├── styles.css
+├── script.js
+├── README.md
+└── LICENSE
+```
+
+## 🚀 Future Enhancements
+
+- Python execution in browser (Pyodide)
+- Spaced repetition system
+- More animations (Recursion trees, Linked lists, etc.)
+- User progress tracking (localStorage)
+- Dark/Light mode toggle
+- Export progress as PDF
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- Add new flashcards
+- Create new animations
+- Improve the UI
+- Add support for more languages
+
+1. Fork the repo
+2. Create a feature branch
+3. Submit a Pull Request
+
+## 📄 License
+
+MIT License — feel free to use this project for learning, teaching, or building upon.
+
+---
+
+**Made with ❤️ for everyone who wants to master coding visually.**
+
 
 ## 🚀 Getting Started
 
